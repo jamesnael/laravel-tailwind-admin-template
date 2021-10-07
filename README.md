@@ -4,7 +4,6 @@ Vue 3.2 + Laravel 8 + Admin Template CRUD example Using Tailwind CSS
 
 <img src="Login.PNG" width="400">
 <img src="Dashboard.PNG" width="400">
-<img src="Table.PNG" width="400">
 <img src="Form.PNG" width="400">
 <img src="Responsive.PNG" width="200">
 
@@ -66,7 +65,7 @@ npm run watch
 php artisan db:seed
 ````
 
-2. Test the data
+2. Testing the data
 ```
 Login with :
 username : demo-admin
