@@ -1,13 +1,12 @@
 # laravel-vuetify-admin
 
-Vue 2.6 + Laravel 8 + Admin Template CRUD example Using Vuetify
+Vue 3.2 + Laravel 8 + Admin Template CRUD example Using Tailwind CSS
 
 <img src="Login.PNG" width="400">
 <img src="Dashboard.PNG" width="400">
 <img src="Table.PNG" width="400">
 <img src="Form.PNG" width="400">
-<img src="Responsive.PNG" width="400">
-
+<img src="Responsive.PNG" width="200">
 
 ### Installation
 
@@ -54,7 +53,7 @@ npm install
 ````
 npm run dev
 ````
- &nbsp;or
+or
 ````
 npm run watch
 ````
@@ -66,6 +65,14 @@ npm run watch
 ````
 php artisan db:seed
 ````
+
+2. Test the data
+```
+Login with :
+username : demo-admin
+password : password
+```
+
 <br>
-Thanks,
-Created By : James Nathanael
+Thanks,<br>
+James Nathanael
