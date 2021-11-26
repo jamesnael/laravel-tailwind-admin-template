@@ -305,19 +305,19 @@
 
 <style>
 .progress-bar {
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0078d4', endColorstr='#0078d4', GradientType=1 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0078d4', endColorstr='#0078d4', GradientType=1 );
   height: 4px;
   -webkit-animation: progressBarAnimation 1.5s linear infinite;
-	animation: progressBarAnimation 1.5s linear infinite;
+  animation: progressBarAnimation 1.5s linear infinite;
 }
 
 @keyframes progressBarAnimation {
-	0% {
-		left: -50%;
-	}
-	100% {
-		left: 100%;
-	}
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 </style>
 
@@ -591,6 +591,7 @@ export default {
       page: 1,
       last_page: 1,
       selected: [],
+      sortOrder: []
     }
   },
   computed: {
@@ -633,18 +634,6 @@ export default {
       }
       return 'text-center';
     },
-    sortOrder() {
-      let sortOrder = [];
-      _.forEach(this.columns, (col) => {
-        if (col.sortable) {
-          sortOrder.push({
-            column: col.field,
-            order: col.sortOrder
-          });
-        }
-      });
-      return sortOrder;
-    },
     reservedQueryParams() {
       return {
         search: this.search,
@@ -676,6 +665,15 @@ export default {
   },
   mounted() {
     this.per_page = this.rowsPerPage;
+    this.sortOrder = [];
+    _.forEach(this.columns, (col) => {
+      if (col.sortable && col.sortOrder) {
+        this.sortOrder.push({
+          column: col.field,
+          order: col.sortOrder
+        });
+      }
+    });
     this.uri = this.getCompleteUri(this.routeUri);
     this.getData();
   },
@@ -790,7 +788,20 @@ export default {
       return 'grid.content.body.' + slotName;
     },
     resortOrder(cell, columns) {
-      cell.sortOrder = cell.sortOrder === 'asc' ? 'desc' : 'asc';
+      cell.sortOrder = cell.sortOrder === 'asc' ? 'desc' : (cell.sortOrder === 'desc' ? null : 'asc');
+      let sortObj = _.find(this.sortOrder, (sort) => { return sort.column === cell.field })
+      if (_.isUndefined(sortObj)) {
+        this.sortOrder.push({
+          column: cell.field,
+          order: cell.sortOrder
+        });
+      } else {
+        if (cell.sortOrder) {
+          sortObj.order = cell.sortOrder
+        } else {
+          this.sortOrder = _.filter(this.sortOrder, (col) => { return col.column !== cell.field })
+        }
+      }
       this.$emit('update:columns', columns);
       this.uri = this.getCompleteUri(this.uri);
       this.getData();
@@ -807,6 +818,10 @@ export default {
         return _.reduce(params, (obj, input) => ({ ...obj, [input]: true }), {});
       }
       return params;
+    },
+    reload () {
+      this.uri = this.getCompleteUri(this.routeUri);
+      this.getData();
     }
   }
 }
