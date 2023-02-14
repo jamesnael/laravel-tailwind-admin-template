@@ -19,11 +19,11 @@
       thead-class="bg-white text-black border-b-2 border-black"
       search-class="border-b border-0 border-black bg-white text-black placeholder-gray-500 focus:outline-none focus:border-b focus:border-0 focus:ring-0"
       loader-type="bar"
-      loading-bar-class="bg-indigo-500"
+      loading-bar-class="bg-blue-600"
       disable-skeleton-loader
       disable-pagination-label
       disable-rows-per-page
-      reload-button-class="focus:outline-none p-3 text-center shadow-md rounded-md font-semibold text-white bg-indigo-500 focus:ring-4 focus:ring-indigo-300"
+      reload-button-class="focus:outline-none p-3 text-center shadow-md rounded-md font-semibold text-white bg-blue-600 focus:ring-4 focus:ring-blue-600"
       search-label="Cari Karyawan" >
       <template #label.no-record>
         <div class="py-2">Tidak ada data untuk ditampilkan.</div>
@@ -87,17 +87,17 @@
     </datatables>
 
     <dialog-modal :show="showModal" @close="showModal = false">
-      <div class="flex flex-col space-y-6 p-4 items-center">
+      <div class="flex flex-col space-y-6 p-10 items-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" class="w-20 h-20 fill-current text-yellow-500">
           <path d="M70.335 30.683c-1.569-2.719-3.878-4.278-6.337-4.278s-4.764 1.556-6.333 4.274l-34.6 59.94c-1.569 2.719-1.765 5.5-.536 7.628s3.734 3.348 6.871 3.348h69.2c3.138 0 5.643-1.22 6.871-3.348s1.035-4.907-.534-7.624zm31.484 65.452c-.456.785-1.627 1.237-3.216 1.237H29.4c-1.589 0-2.76-.452-3.214-1.237s-.26-2.029.536-3.406l34.6-59.94c.794-1.375 1.769-2.163 2.676-2.163s1.886.79 2.68 2.167l34.6 59.939c.798 1.377.994 2.616.541 3.403z"/>
           <path d="M64 78.144a2.11 2.11 0 0 0 2.111-2.111V48.24a2.111 2.111 0 0 0-4.222 0v27.793A2.11 2.11 0 0 0 64 78.144z"/>
           <circle cx="64" cy="86.506" r="3.734"/>
         </svg>
-        <p class="text-md md:text-lg">
+        <p class="text-center md:text-lg">
           Apakah Anda yakin untuk menghapus Karyawan ini? Karyawan yang telah dihapus tidak dapat dikembalikan.
         </p>
-        <div class="w-full">
-          <div class="flex flex-row justify-end space-x-4">
+        <div class="w-full pt-5">
+          <div class="flex flex-row justify-center space-x-4">
             <button type="button" class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 disabled:cursor-not-allowed" @click.prevent="showModal = false" :disabled="form.processing">
               Batal
             </button>
@@ -138,6 +138,16 @@
       const datatables = ref(null);
 
       const columns = ref([
+        {
+          uniqid: 'rowIndex',
+          label: '#',
+          field: 'rowIndex',
+          sortable: false,
+          sortOrder: 'asc',
+          align: 'center',
+          classes: 'px-4 py-2 md:py-4 text-center md:text-center',
+          headerClass: 'text-center p-4'
+        },
         {
           uniqid: 'namaLengkap',
           label: 'Nama Lengkap',

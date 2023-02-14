@@ -41,7 +41,7 @@
               <img :src="'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=' + $page.props.currentUser.nama_lengkap" :alt="$page.props.currentUser.nama_lengkap" class="rounded-full h-8 w-8 object-cover">
               <div class="ml-3">
                 <div class="font-medium text-white">{{ $page.props.currentUser.nama_lengkap }}</div>
-                <div class="text-xs mt-0.5 text-gray-500">{{ $page.props.currentUser.jabatan.nama_jabatan }}</div>
+                <div class="text-xs mt-0.5 text-gray-400">{{ $page.props.currentUser.jabatan.nama_jabatan }}</div>
               </div>
             </div>
           </user-menu>

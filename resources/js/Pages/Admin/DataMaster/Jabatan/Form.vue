@@ -54,9 +54,9 @@
       </div>
 
       <div class="flex flex-row justify-end space-x-4">
-        <button type="button" class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 disabled:cursor-not-allowed" @click.prevent="form.reset();form.clearErrors()" :disabled="form.processing">
-          Ulang
-        </button>
+        <Link class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 disabled:cursor-not-allowed" :href="route('admin.data-master.jabatan.index')" :disabled="form.processing">
+          Kembali
+        </Link>
         <button type="submit" class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-not-allowed" :disabled="form.processing">
           Simpan
         </button>
@@ -67,13 +67,14 @@
 
 <script>
   import { ref, onMounted } from 'vue';
-  import { useForm } from '@inertiajs/inertia-vue3';
+  import { useForm, Link } from '@inertiajs/inertia-vue3';
   import SelectSearch from '@/Components/Select/SelectSearch.vue';
 
   export default {
     name: 'MasterJabatanForm',
     components: {
-      SelectSearch
+      SelectSearch,
+      Link
     },
     props: {
       httpMethod: {

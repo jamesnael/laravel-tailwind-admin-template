@@ -65,7 +65,7 @@
       <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
         <div class="flex-1 flex flex-col space-y-2">
           <span class="text-black font-medium">NIK <span class="text-red-400">*</span></span>
-          <input type="text" :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.nik }" v-model="form.nik" :disabled="form.processing">
+          <input type="text" :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.nik }" v-model="form.nik" maxlength="16" :disabled="form.processing">
           <span v-if="form.errors.nik" class="text-red-400 italic">{{ form.errors.nik }}</span>
         </div>
         <div class="flex-1 flex flex-col space-y-2">
@@ -104,9 +104,9 @@
       </div>
 
       <div class="flex flex-row justify-end space-x-4">
-        <button type="button" class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 disabled:cursor-not-allowed" @click.prevent="form.reset();form.clearErrors()" :disabled="form.processing">
-          Ulang
-        </button>
+        <Link class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 disabled:cursor-not-allowed" :href="route('admin.data-master.karyawan.index')" :disabled="form.processing">
+          Kembali
+        </Link>
         <button type="submit" class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-not-allowed" :disabled="form.processing">
           Simpan
         </button>
@@ -117,7 +117,7 @@
 
 <script>
   import { ref, onMounted, computed } from 'vue';
-  import { useForm } from '@inertiajs/inertia-vue3';
+  import { useForm, Link } from '@inertiajs/inertia-vue3';
   import SelectSearch from '@/Components/Select/SelectSearch.vue';
   import InputPassword from '@/Components/Input/Password.vue';
   import InputDate from '@/Components/Input/Date.vue';
@@ -132,6 +132,7 @@
       InputDate,
       InputPhoneNumber,
       PreviewImage,
+      Link
     },
     props: {
       httpMethod: {

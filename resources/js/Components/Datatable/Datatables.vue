@@ -426,7 +426,7 @@ export default {
         "text-base",
         "focus:outline-none",
         "focus:ring-2",
-        "focus:ring-indigo-400",
+        "focus:ring-blue-600",
         "focus:border-transparent",
       ]
     },
@@ -443,9 +443,9 @@ export default {
         "rounded-md",
         "font-semibold",
         "text-white",
-        "bg-indigo-500",
+        "bg-blue-600",
         "focus:ring-4",
-        "focus:ring-indigo-300",
+        "focus:ring-blue-300",
       ]
     },
     reloadButtonStyle: [Array, String, Object],
@@ -471,7 +471,7 @@ export default {
         "text-base",
         "focus:outline-none",
         "focus:ring-2",
-        "focus:ring-indigo-400",
+        "focus:ring-blue-600",
         "focus:border-transparent",
       ]
     },
@@ -494,7 +494,7 @@ export default {
         "text-base",
         "focus:outline-none",
         "focus:ring-2",
-        "focus:ring-indigo-400",
+        "focus:ring-blue-600",
         "focus:border-transparent",
       ]
     },
@@ -511,9 +511,9 @@ export default {
         "shadow-md",
         "font-semibold",
         "text-white",
-        "bg-indigo-500",
+        "bg-blue-600",
         "focus:ring-4",
-        "focus:ring-indigo-300",
+        "focus:ring-blue-300",
         "disabled:cursor-not-allowed",
       ]
     },
@@ -529,9 +529,9 @@ export default {
         "shadow-md",
         "font-semibold",
         "text-white",
-        "bg-indigo-500",
+        "bg-blue-600",
         "focus:ring-4",
-        "focus:ring-indigo-300",
+        "focus:ring-blue-300",
         "disabled:cursor-not-allowed",
       ]
     },
@@ -547,9 +547,9 @@ export default {
         "shadow-md",
         "font-semibold",
         "text-white",
-        "bg-indigo-500",
+        "bg-blue-600",
         "focus:ring-4",
-        "focus:ring-indigo-300",
+        "focus:ring-blue-300",
         "disabled:cursor-not-allowed",
       ]
     },
@@ -565,9 +565,9 @@ export default {
         "shadow-md",
         "font-semibold",
         "text-white",
-        "bg-indigo-500",
+        "bg-blue-600",
         "focus:ring-4",
-        "focus:ring-indigo-300",
+        "focus:ring-blue-300",
         "disabled:cursor-not-allowed",
       ]
     },
@@ -737,8 +737,15 @@ export default {
           var status = this.call.status;
           if (status === 0 || (status >= 200 && status < 400)) {
             // The request has been completed successfully
+            let items = [];
             let data = this.call.response;
-            this.items = data.data;
+            var number = data.from;
+            // this.items = data.data;
+            _.forEach(data.data, (value, key) => {
+              value.rowIndex = number++;
+              items.push(value);
+            });
+            this.items = items;
             this.first_page_url = data.first_page_url;
             this.prev_page_url = data.prev_page_url;
             this.next_page_url = data.next_page_url;

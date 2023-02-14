@@ -2,7 +2,7 @@
   <div class="relative">
     <input type="text" :value="computedValue" class="absolute w-full pl-12 pointer-events-none" :class="class" :style="style" :readonly="readonly" :placeholder="placeholder" :disabled="disabled">
     <span class="w-4 h-4 absolute left-3 top-3 pointer-events-none">+62</span>
-    <input type="text" @input="emitValue($event)" :value="modelValue" class="w-full pl-9" :class="class" :style="style" :readonly="readonly" :placeholder="placeholder" :disabled="disabled">
+    <input type="text" @input="emitValue($event)" :value="modelValue" class="w-full pl-9" :class="class" :style="style" :readonly="readonly" :placeholder="placeholder" :disabled="disabled" :maxlength="15">
   </div>
 </template>
 

@@ -7,7 +7,7 @@
     </template>
     
     <template #page-title>
-      <h2 class="text-dark-7 text-lg font-medium mr-auto">Ubah Karyawan</h2>
+      <h2 class="text-dark-7 text-lg font-medium mr-auto pb-5">Ubah Karyawan</h2>
     </template>
 
     <karyawan-form

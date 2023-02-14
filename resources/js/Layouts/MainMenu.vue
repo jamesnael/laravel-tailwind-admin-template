@@ -1,8 +1,8 @@
 <template>
   <ul>
     <li v-for="menu in $page.props.mainMenu">
-      <div v-if="menu.type === 'divider'" class="w-full h-px z-10 relative bg-gray-500 my-4"></div>
-      <div v-else>
+      <!-- <div v-if="menu.type === 'divider'" class="w-full h-px z-10 relative bg-gray-500 my-4"></div> -->
+      <div>
         <Link v-if="!menu.children && hasAccess(menu.access, $page.props.currentUser.jabatan.hak_akses)" :href="menu.route === '#' ? '#' : route(menu.route)" :class="{ 'h-12 flex items-center pl-5 mb-1 relative rounded-full': true, 'text-white bg-dark-1': menu.active, 'text-gray-300 hover:bg-dark-3': !menu.active }">
             <slot :name="'icon-menu-' + menu.uniqid">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
