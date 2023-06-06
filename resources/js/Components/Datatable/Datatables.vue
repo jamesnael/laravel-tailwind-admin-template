@@ -717,6 +717,7 @@ export default {
       setTimeout(() => {
         this.uri = this.getCompleteUri(this.routeUri);
         this.getData();
+        this.isLoading = false;
       }, 1000);
     },
     getData() {
