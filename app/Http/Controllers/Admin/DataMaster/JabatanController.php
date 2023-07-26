@@ -26,11 +26,11 @@ class JabatanController extends Controller
     {
         $this->breadcrumbs = [
             [
-                'text' => 'Data Master',
+                'text' => 'Master Data',
                 'route' => route('admin.data-master.jabatan.index')
             ],
             [
-                'text' => 'Jabatan',
+                'text' => 'Group User',
                 'route' => route('admin.data-master.jabatan.index')
             ]
         ];
@@ -56,7 +56,7 @@ class JabatanController extends Controller
     public function create()
     {
         $this->breadcrumbs[] = [
-            'text' => 'Tambah Jabatan',
+            'text' => 'Create Group User',
             'route' => route('admin.data-master.jabatan.create')
         ];
         return Inertia::render('Admin/DataMaster/Jabatan/Create', [
@@ -78,6 +78,12 @@ class JabatanController extends Controller
         DB::beginTransaction();
         try {
             $jabatan = Jabatan::create($request->all());
+
+            log_activity(
+                'Create Group User ' . $jabatan->nama_jabatan,
+                $jabatan
+            );
+
             DB::commit();
             return redirect()->route('admin.data-master.jabatan.index')->with('alertState', 'success')->with('alertMessage', 'Jabatan baru berhasil ditambahkan.');
         } catch (Exception $e) {
@@ -95,7 +101,7 @@ class JabatanController extends Controller
     public function edit(Jabatan $jabatan)
     {
         $this->breadcrumbs[] = [
-            'text' => 'Ubah Jabatan',
+            'text' => 'Edit Group User',
             'route' => route('admin.data-master.jabatan.edit', [$jabatan->slug])
         ];
         return Inertia::render('Admin/DataMaster/Jabatan/Edit', [
@@ -118,7 +124,13 @@ class JabatanController extends Controller
 
         DB::beginTransaction();
         try {
-            $jabatan = $jabatan->update($request->all());
+            $jabatan->update($request->all());
+
+            log_activity(
+                'Edit Group User ' . $jabatan->nama_jabatan,
+                $jabatan
+            );
+
             DB::commit();
             return redirect()->route('admin.data-master.jabatan.index')->with('alertState', 'success')->with('alertMessage', 'Data Jabatan berhasil diubah.');
         } catch (Exception $e) {
@@ -138,6 +150,12 @@ class JabatanController extends Controller
         DB::beginTransaction();
         try {
             $jabatan->delete();
+
+            log_activity(
+                'Delete Group User ' . $jabatan->nama_jabatan,
+                $jabatan
+            );
+
             DB::commit();
             return redirect()->route('admin.data-master.jabatan.index')->with('alertState', 'success')->with('alertMessage', 'Jabatan berhasil dihapus.');
         } catch (Exception $e) {

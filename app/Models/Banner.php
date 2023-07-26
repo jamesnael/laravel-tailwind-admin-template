@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use EloquentFilter\Filterable;
+use Illuminate\Support\Facades\Storage;
 
-class Jabatan extends Model
+class Banner extends Model
 {
     use HasFactory, SoftDeletes, Sluggable, Filterable;
 
@@ -39,7 +40,7 @@ class Jabatan extends Model
      *
      * @var string
      */
-    protected $table = 'ms_jabatan';
+    protected $table = 'ms_banner';
 
     /**
      * The attributes that aren't mass assignable.
@@ -47,15 +48,6 @@ class Jabatan extends Model
      * @var array
      */
     protected $guarded = [];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'hak_akses' => 'array',
-    ];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -66,16 +58,19 @@ class Jabatan extends Model
     {
         return [
             'slug' => [
-                'source' => ['nama_jabatan', 'tipe_user']
+                'source' => ['page_name']
             ]
         ];
     }
 
     /**
-     * Get the relations for the model.
+     * Get the model's banner image path.
+     *
+     * @param  string  $value
+     * @return string
      */
-    public function karyawan()
+    public function getBannerImageAttribute($value)
     {
-        return $this->hasMany(Karyawan::class, 'jabatan_id', 'id');
+        return Storage::disk('public')->url($value);
     }
 }

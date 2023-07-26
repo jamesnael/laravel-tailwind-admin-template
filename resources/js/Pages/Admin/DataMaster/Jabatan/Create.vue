@@ -1,5 +1,5 @@
 <template>
-  <Head title="Jabatan" />
+  <Head title="Group User" />
 
   <admin-layout>
     <template #breadcrumbs>
@@ -7,7 +7,7 @@
     </template>
     
     <template #page-title>
-      <h2 class="text-dark-7 text-lg font-medium mr-auto pb-5">Tambah Jabatan</h2>
+      <h2 class="text-dark-7 text-lg font-medium mr-auto pb-5">Create Group User</h2>
     </template>
 
     <jabatan-form

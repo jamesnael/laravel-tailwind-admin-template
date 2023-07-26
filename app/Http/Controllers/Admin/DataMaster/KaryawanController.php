@@ -25,11 +25,11 @@ class KaryawanController extends Controller
     {
         $this->breadcrumbs = [
             [
-                'text' => 'Data Master',
+                'text' => 'Master Data',
                 'route' => route('admin.data-master.karyawan.index')
             ],
             [
-                'text' => 'Karyawan',
+                'text' => 'User',
                 'route' => route('admin.data-master.karyawan.index')
             ]
         ];
@@ -55,7 +55,7 @@ class KaryawanController extends Controller
     public function create()
     {
         $this->breadcrumbs[] = [
-            'text' => 'Tambah Karyawan',
+            'text' => 'Create User',
             'route' => route('admin.data-master.karyawan.create')
         ];
         return Inertia::render('Admin/DataMaster/Karyawan/Create', [
@@ -84,6 +84,12 @@ class KaryawanController extends Controller
                 $karyawan->ektp_path = $path;
                 $karyawan->save();
             }
+
+            log_activity(
+                'Create User ' . $karyawan->nama_lengkap,
+                $karyawan
+            );
+
             DB::commit();
             return redirect()->route('admin.data-master.karyawan.index')->with('alertState', 'success')->with('alertMessage', 'Karyawan baru berhasil ditambahkan.');
         } catch (Exception $e) {
@@ -101,7 +107,7 @@ class KaryawanController extends Controller
     public function edit(Karyawan $karyawan)
     {
         $this->breadcrumbs[] = [
-            'text' => 'Ubah Karyawan',
+            'text' => 'Edit User',
             'route' => route('admin.data-master.karyawan.edit', [$karyawan->slug])
         ];
         return Inertia::render('Admin/DataMaster/Karyawan/Edit', [
@@ -134,6 +140,12 @@ class KaryawanController extends Controller
                 $karyawan->password = Hash::make($request->password);
             }
             $karyawan->save();
+
+            log_activity(
+                'Edit User ' . $karyawan->nama_lengkap,
+                $karyawan
+            );
+
             DB::commit();
             return redirect()->route('admin.data-master.karyawan.index')->with('alertState', 'success')->with('alertMessage', 'Data Karyawan berhasil diubah.');
         } catch (Exception $e) {
@@ -153,6 +165,12 @@ class KaryawanController extends Controller
         DB::beginTransaction();
         try {
             $karyawan->delete();
+
+            log_activity(
+                'Delete User ' . $karyawan->nama_lengkap,
+                $karyawan
+            );
+
             DB::commit();
             return redirect()->route('admin.data-master.karyawan.index')->with('alertState', 'success')->with('alertMessage', 'Karyawan berhasil dihapus.');
         } catch (Exception $e) {
@@ -182,8 +200,6 @@ class KaryawanController extends Controller
     {
         return [
             'nama_lengkap' => 'required',
-            'tanggal_lahir' => 'required|date_format:Y-m-d',
-            'nomor_hp' => 'required|numeric',
             'username' => [
                 'required',
                 'string',
@@ -208,18 +224,6 @@ class KaryawanController extends Controller
                 'confirmed',
             ],
             'password_confirmation' => 'required_with:password',
-            'nik' => 'required|numeric',
-            'ektp' => [
-                Rule::requiredIf(function () use ($karyawan) {
-                    return $karyawan == null;
-                }),
-                'nullable',
-                'file',
-                'image',
-                'mimes:jpg,jpeg,png',
-                'max:1024',
-            ],
-            'alamat_lengkap' => 'required',
             'jabatan_id' => 'required|exists:App\Models\Jabatan,id',
             'status' => 'required|boolean',
         ];

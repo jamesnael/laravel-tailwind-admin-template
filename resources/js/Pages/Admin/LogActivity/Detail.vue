@@ -1,5 +1,5 @@
 <template>
-  <Head title="User" />
+  <Head title="Log Activity - Detail" />
 
   <admin-layout>
     <template #breadcrumbs>
@@ -7,13 +7,12 @@
     </template>
     
     <template #page-title>
-      <h2 class="text-dark-7 text-lg font-medium mr-auto pb-5">Create User</h2>
+      <h2 class="text-dark-7 text-lg font-medium mr-auto">Detail Log Activity {{ nama_user }}</h2>
     </template>
 
-    <karyawan-form
-      http-method="post"
-      :action-uri="route('admin.data-master.karyawan.store')"
-      :jabatan="jabatan"
+    <log-activity-form
+      http-method="put"
+      :log-activity="log_activity"
      />
 
   </admin-layout>
@@ -23,23 +22,26 @@
   import { Head, useForm } from '@inertiajs/inertia-vue3';
   import AdminLayout from '@/Layouts/AdminLayout.vue';
   import Breadcrumb from '@/Layouts/Breadcrumb.vue';
-  import KaryawanForm from '@/Pages/Admin/DataMaster/Karyawan/Form.vue';
+  import LogActivityForm from '@/Pages/Admin/LogActivity/Form.vue';
 
   export default {
-    name: 'MasterKaryawanCreate',
+    name: 'LogActivityDetail',
     components: {
       Head,
       AdminLayout,
       Breadcrumb,
-      KaryawanForm,
+      LogActivityForm,
     },
     props: {
       breadcrumbs: {
         type: Array
       },
-      jabatan: {
-        type: Array,
-        default: () => []
+      nama_user: {
+        type: String
+      },
+      log_activity: {
+        type: Object,
+        default: () => null
       }
     }
   }

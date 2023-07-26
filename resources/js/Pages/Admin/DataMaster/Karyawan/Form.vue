@@ -3,12 +3,12 @@
     <div class="flex flex-col space-y-4">
       <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
         <div class="flex-1 flex flex-col space-y-2">
-          <span class="text-black font-medium">Nama Lengkap <span class="text-red-400">*</span></span>
+          <span class="text-black font-medium">Full Name <span class="text-red-400">*</span></span>
           <input type="text" :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.nama_lengkap }" v-model="form.nama_lengkap" :disabled="form.processing">
           <span v-if="form.errors.nama_lengkap" class="text-red-400 italic">{{ form.errors.nama_lengkap }}</span>
         </div>
         <div class="flex-1 flex flex-col space-y-2">
-          <span class="text-black font-medium">Jabatan <span class="text-red-400">*</span></span>
+          <span class="text-black font-medium">Group User <span class="text-red-400">*</span></span>
           <select-search
             clearable
             :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.jabatan_id }"
@@ -23,7 +23,7 @@
 
       <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
         <div class="flex-1 flex flex-col space-y-2">
-          <span class="text-black font-medium">Alamat Email <span class="text-red-400">*</span></span>
+          <span class="text-black font-medium">Email Address <span class="text-red-400">*</span></span>
           <input type="email" :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.email }" v-model="form.email" :disabled="form.processing">
           <span v-if="form.errors.email" class="text-red-400 italic">{{ form.errors.email }}</span>
         </div>
@@ -38,18 +38,18 @@
         <div class="flex-1 flex flex-col space-y-2">
           <span class="text-black font-medium">Password <span v-if="!karyawan" class="text-red-400">*</span></span>
           <input-password :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.password }" v-model="form.password" :disabled="form.processing" />
-          <span v-if="karyawan" class="text-black italic text-xs">Biarkan kosong jika tidak ingin merubah password karyawan.</span>
+          <span v-if="karyawan" class="text-black italic text-xs">Biarkan kosong jika tidak ingin merubah password user.</span>
           <span v-if="form.errors.password" class="text-red-400 italic">{{ form.errors.password }}</span>
         </div>
         <div class="flex-1 flex flex-col space-y-2">
-          <span class="text-black font-medium">Konfirmasi Password <span v-if="!karyawan" class="text-red-400">*</span></span>
+          <span class="text-black font-medium">Password Confirmation <span v-if="!karyawan" class="text-red-400">*</span></span>
           <input-password :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.password_confirmation }" v-model="form.password_confirmation" :disabled="form.processing" />
-          <span v-if="karyawan" class="text-black italic text-xs">Biarkan kosong jika tidak ingin merubah password karyawan.</span>
+          <span v-if="karyawan" class="text-black italic text-xs">Biarkan kosong jika tidak ingin merubah password user.</span>
           <span v-if="form.errors.password_confirmation" class="text-red-400 italic">{{ form.errors.password_confirmation }}</span>
         </div>
       </div>
 
-      <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
+      <!-- <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
         <div class="flex-1 flex flex-col space-y-2">
           <span class="text-black font-medium">Tanggal Lahir <span class="text-red-400">*</span></span>
           <input-date :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.tanggal_lahir }" v-model="form.tanggal_lahir" :disabled="form.processing" />
@@ -85,7 +85,7 @@
           <textarea rows="1" :class="{ 'w-full rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.alamat_lengkap }" v-model="form.alamat_lengkap" :disabled="form.processing" />
           <span v-if="form.errors.alamat_lengkap" class="text-red-400 italic">{{ form.errors.alamat_lengkap }}</span>
         </div>
-      </div>
+      </div> -->
 
       <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
         <div class="flex-1 flex flex-col space-y-2">
@@ -105,10 +105,10 @@
 
       <div class="flex flex-row justify-end space-x-4">
         <Link class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 disabled:cursor-not-allowed" :href="route('admin.data-master.karyawan.index')" :disabled="form.processing">
-          Kembali
+          Back
         </Link>
         <button type="submit" class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-not-allowed" :disabled="form.processing">
-          Simpan
+          Save
         </button>
       </div>
     </div>

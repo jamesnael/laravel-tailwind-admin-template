@@ -28,14 +28,14 @@ class Karyawan extends Authenticatable
         parent::boot();
 
         static::creating(function ($model) {
-            $model->created_by = \Auth::user()->name ?? 'System';
-            $model->updated_by = \Auth::user()->name ?? 'System';
+            $model->created_by = \Auth::user()->nama_lengkap ?? 'System';
+            $model->updated_by = \Auth::user()->nama_lengkap ?? 'System';
         });
         static::updating(function ($model) {
-            $model->updated_by = \Auth::user()->name ?? 'System';
+            $model->updated_by = \Auth::user()->nama_lengkap ?? 'System';
         });
         static::deleted(function ($model) {
-            $model->deleted_by = \Auth::user()->name ?? 'System';
+            $model->deleted_by = \Auth::user()->nama_lengkap ?? 'System';
             $model->save();
         });
     }

@@ -1,5 +1,5 @@
 <template>
-  <Head title="Jabatan" />
+  <Head title="Group User" />
 
   <admin-layout>
     <template #breadcrumbs>
@@ -7,7 +7,7 @@
     </template>
     
     <template #page-title>
-      <h2 class="text-dark-7 text-lg font-medium mr-auto">Master Jabatan</h2>
+      <h2 class="text-dark-7 text-lg font-medium mr-auto">Master Group User</h2>
     </template>
 
     <datatables
@@ -24,7 +24,7 @@
       disable-pagination-label
       disable-rows-per-page
       reload-button-class="focus:outline-none p-3 text-center shadow-md rounded-md font-semibold text-white bg-blue-600 focus:ring-4 focus:ring-blue-300"
-      search-label="Cari Jabatan" >
+      search-label="Cari Group User" >
       <template #label.no-record>
         <div class="py-2">Tidak ada data untuk ditampilkan.</div>
       </template>
@@ -48,7 +48,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 md:w-3 md:h-3 stroke-current" viewBox="0 0 16 16">
               <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
             </svg>
-            <span class="hidden md:inline-flex ml-2">Tambah Jabatan</span>
+            <span class="hidden md:inline-flex ml-2">Create Group User</span>
           </div>
         </Link>
       </template>
@@ -150,7 +150,7 @@
         },
         {
           uniqid: 'namaJabatan',
-          label: 'Nama Jabatan',
+          label: 'Group User',
           field: 'nama_jabatan',
           sortable: false,
           sortOrder: 'asc',
@@ -160,7 +160,7 @@
         },
         {
           uniqid: 'tipeUser',
-          label: 'Tipe User',
+          label: 'User Type',
           field: 'tipe_user',
           sortable: false,
           align: 'center',
@@ -169,7 +169,7 @@
         },
         {
           uniqid: 'keterangan',
-          label: 'Keterangan',
+          label: 'Description',
           field: 'keterangan',
           sortable: false,
           align: 'center',
@@ -178,7 +178,7 @@
         },
         {
           uniqid: 'action',
-          label: 'Aksi',
+          label: 'Action',
           field: 'id',
           sortable: false,
           align: 'center',

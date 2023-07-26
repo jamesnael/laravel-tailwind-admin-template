@@ -16,21 +16,32 @@ return [
       'type' => 'divider',
     ],
     [
-      'uniqid' => 'menuDataMaster',
+      'uniqid' => 'menuMasterData',
       'type' => 'menu',
-      'text' => 'Data Master',
+      'text' => 'Master Data',
       'route' => '#',
       'access' => [
         'module.data-master.jabatan.index',
         'module.data-master.karyawan.index',
+        'module.data-master.banner.index',
       ],
       'active' => false,
       'open' => false,
       'children' => [
         [
-          'uniqid' => 'masterJabatan',
+          'uniqid' => 'masterBanner',
           'type' => 'menu',
-          'text' => 'Jabatan',
+          'text' => 'Banner',
+          'route' => 'admin.data-master.banner.index',
+          'access' => 'module.data-master.banner.index',
+          'active' => false,
+          'open' => false,
+          'children' => null
+        ],
+        [
+          'uniqid' => 'masterGroupUser',
+          'type' => 'menu',
+          'text' => 'Group User',
           'route' => 'admin.data-master.jabatan.index',
           'access' => 'module.data-master.jabatan.index',
           'active' => false,
@@ -38,9 +49,9 @@ return [
           'children' => null
         ],
         [
-          'uniqid' => 'masterKaryawan',
+          'uniqid' => 'masterUser',
           'type' => 'menu',
-          'text' => 'Karyawan',
+          'text' => 'User',
           'route' => 'admin.data-master.karyawan.index',
           'access' => 'module.data-master.karyawan.index',
           'active' => false,
@@ -63,11 +74,11 @@ return [
       ]
     ],
     [
-      'uniqid' => 'menuLogAktivitas',
+      'uniqid' => 'menuLogActivity',
       'type' => 'menu',
-      'text' => 'Log Aktivitas',
-      // 'route' => 'admin.log-aktivitas.index',
-      'route' => '#',
+      'text' => 'Log Activity',
+      'route' => 'admin.log-activity.index',
+      'access' => 'module.log-activity.index',
       'active' => false,
       'open' => false,
       'children' => null

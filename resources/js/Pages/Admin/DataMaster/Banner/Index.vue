@@ -1,5 +1,5 @@
 <template>
-  <Head title="User" />
+  <Head title="Banner" />
 
   <admin-layout>
     <template #breadcrumbs>
@@ -7,13 +7,13 @@
     </template>
     
     <template #page-title>
-      <h2 class="text-dark-7 text-lg font-medium mr-auto">Master User</h2>
+      <h2 class="text-dark-7 text-lg font-medium mr-auto">Master Banner</h2>
     </template>
 
     <datatables
       ref="datatables"
       class="pt-4"
-      :route-uri="route('admin.data-master.karyawan.table')"
+      :route-uri="route('admin.data-master.banner.table')"
       v-model:columns="columns"
       table-class="w-full table-auto border-collapse text-black"
       thead-class="bg-white text-black border-b-2 border-black"
@@ -24,7 +24,7 @@
       disable-pagination-label
       disable-rows-per-page
       reload-button-class="focus:outline-none p-3 text-center shadow-md rounded-md font-semibold text-white bg-blue-600 focus:ring-4 focus:ring-blue-600"
-      search-label="Cari User" >
+      search-label="Cari Banner" >
       <template #label.no-record>
         <div class="py-2">Tidak ada data untuk ditampilkan.</div>
       </template>
@@ -43,45 +43,38 @@
         </svg>
       </template>
       <template #after.reload-button>
-        <Link v-if="hasAccess('module.data-master.karyawan.create', $page.props.currentUser.jabatan.hak_akses)" :href="route('admin.data-master.karyawan.create')" class="p-3 text-center shadow-md rounded-md font-semibold text-white bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
+        <Link v-if="hasAccess('module.data-master.banner.create', $page.props.currentUser.jabatan.hak_akses)" :href="route('admin.data-master.banner.create')" class="p-3 text-center shadow-md rounded-md font-semibold text-white bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
           <div class="flex content-center items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 md:w-3 md:h-3 stroke-current" viewBox="0 0 16 16">
               <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
             </svg>
-            <span class="hidden md:inline-flex ml-2">Create User</span>
+            <span class="hidden md:inline-flex ml-2">Create Banner</span>
           </div>
         </Link>
       </template>
       <template #grid.content.body.action="{ row }">
         <div class="flex flex-row justify-center space-x-4">
-          <Link v-if="hasAccess('module.data-master.karyawan.edit', $page.props.currentUser.jabatan.hak_akses)" :href="route('admin.data-master.karyawan.edit', {karyawan: row.slug})">
+          <Link v-if="hasAccess('module.data-master.banner.edit', $page.props.currentUser.jabatan.hak_akses)" :href="route('admin.data-master.banner.edit', {banner: row.slug})">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 stroke-current text-blue-600" viewBox="0 0 16 16">
               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
           </Link>
-          <button v-if="hasAccess('module.data-master.karyawan.delete', $page.props.currentUser.jabatan.hak_akses)" type="button" class="appearance-none outline-none focus:border-transparent focus:outline-none bg-transparent" @click.prevent="confirmDeleteRow(row)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 stroke-current text-red-600" viewBox="0 0 16 16">
-              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-            </svg>
-          </button>
         </div>
       </template>
       <template #table.cell.content.action="{ row }">
         <div class="flex flex-row justify-center space-x-4">
-          <Link v-if="hasAccess('module.data-master.karyawan.edit', $page.props.currentUser.jabatan.hak_akses)" :href="route('admin.data-master.karyawan.edit', {karyawan: row.slug})">
+          <Link v-if="hasAccess('module.data-master.banner.edit', $page.props.currentUser.jabatan.hak_akses)" :href="route('admin.data-master.banner.edit', {banner: row.slug})">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 stroke-current text-blue-600" viewBox="0 0 16 16">
               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
           </Link>
-          <button v-if="hasAccess('module.data-master.karyawan.delete', $page.props.currentUser.jabatan.hak_akses)" type="button" class="appearance-none outline-none focus:border-transparent focus:outline-none bg-transparent" @click.prevent="confirmDeleteRow(row)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-4 h-4 stroke-current text-red-600" viewBox="0 0 16 16">
-              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-            </svg>
-          </button>
+        </div>
+      </template>
+      <template #table.cell.content.bannerImage="{ row }">
+        <div align="center">
+          <img :src="row.banner_image" width="90">
         </div>
       </template>
     </datatables>
@@ -94,7 +87,7 @@
           <circle cx="64" cy="86.506" r="3.734"/>
         </svg>
         <p class="text-center md:text-lg">
-          Apakah Anda yakin untuk menghapus User ini? User yang telah dihapus tidak dapat dikembalikan.
+          Apakah Anda yakin untuk menghapus Banner ini? Banner yang telah dihapus tidak dapat dikembalikan.
         </p>
         <div class="w-full pt-5">
           <div class="flex flex-row justify-center space-x-4">
@@ -120,7 +113,7 @@
   import DialogModal from '@/Components/Modal/DialogModal.vue';
 
   export default {
-    name: 'MasterUserIndex',
+    name: 'MasterBannerIndex',
     components: {
       Head,
       Link,
@@ -149,9 +142,9 @@
           headerClass: 'text-center p-4'
         },
         {
-          uniqid: 'namaLengkap',
-          label: 'Full Name',
-          field: 'nama_lengkap',
+          uniqid: 'pageName',
+          label: 'Page Name',
+          field: 'page_name',
           sortable: false,
           sortOrder: 'asc',
           align: 'center',
@@ -159,28 +152,18 @@
           headerClass: 'text-center p-4'
         },
         {
-          uniqid: 'jabatanId',
-          label: 'Group User',
-          field: (row) => row.jabatan.nama_jabatan,
+          uniqid: 'title',
+          label: 'Title',
+          field: 'title',
           sortable: false,
           align: 'center',
           classes: 'px-4 py-2 md:py-4 text-left md:text-center',
           headerClass: 'text-center p-4'
         },
         {
-          uniqid: 'username',
-          label: 'Username',
-          field: 'username',
-          sortable: false,
-          sortOrder: 'asc',
-          align: 'center',
-          classes: 'px-4 py-2 md:py-4 text-left md:text-center',
-          headerClass: 'text-center p-4'
-        },
-        {
-          uniqid: 'email',
-          label: 'Email',
-          field: 'email',
+          uniqid: 'bannerImage',
+          label: 'Banner Image',
+          field: 'banner_image',
           sortable: false,
           sortOrder: 'asc',
           align: 'center',
@@ -208,7 +191,7 @@
       }
 
       function deleteRow() {
-        form.delete(route('admin.data-master.karyawan.destroy', { karyawan: form.value.slug }), {
+        form.delete(route('admin.data-master.banner.destroy', { banner: form.value.slug }), {
           onSuccess: () => {
             form.reset()
             showModal.value = false

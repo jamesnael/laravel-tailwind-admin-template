@@ -3,46 +3,63 @@
 return [
   'access' => [
     [
-      'module' => 'Data Master',
+      'module' => 'Master Data',
       'sub_module' => [
         [
-          'module' => 'Jabatan',
+          'module' => 'Banner',
           'activities' => [
             [
-              'label' => 'Menu Jabatan',
+              'label' => 'Menu Banner',
+              'value' => 'module.data-master.banner.index',
+            ],
+            [
+              'label' => 'Edit Banner',
+              'value' => 'module.data-master.banner.edit',
+            ],
+            [
+              'label' => 'Delete Banner',
+              'value' => 'module.data-master.banner.delete',
+            ]
+          ]
+        ],
+        [
+          'module' => 'Group User',
+          'activities' => [
+            [
+              'label' => 'Menu Group User',
               'value' => 'module.data-master.jabatan.index',
             ],
             [
-              'label' => 'Tambah Jabatan',
+              'label' => 'Create Group User',
               'value' => 'module.data-master.jabatan.create',
             ],
             [
-              'label' => 'Ubah Jabatan',
+              'label' => 'Edit Group User',
               'value' => 'module.data-master.jabatan.edit',
             ],
             [
-              'label' => 'Hapus Jabatan',
+              'label' => 'Delete Group User',
               'value' => 'module.data-master.jabatan.delete',
             ]
           ]
         ],
         [
-          'module' => 'Karyawan',
+          'module' => 'User',
           'activities' => [
             [
-              'label' => 'Menu Karyawan',
+              'label' => 'Menu User',
               'value' => 'module.data-master.karyawan.index',
             ],
             [
-              'label' => 'Tambah Karyawan',
+              'label' => 'Create User',
               'value' => 'module.data-master.karyawan.create',
             ],
             [
-              'label' => 'Ubah Karyawan',
+              'label' => 'Edit User',
               'value' => 'module.data-master.karyawan.edit',
             ],
             [
-              'label' => 'Hapus Karyawan',
+              'label' => 'Delete User',
               'value' => 'module.data-master.karyawan.delete',
             ]
           ]
@@ -53,11 +70,15 @@ return [
       'module' => 'Log',
       'sub_module' => [
         [
-          'module' => 'Log Aktivitas',
+          'module' => 'Log Activity',
           'activities' => [
             [
-              'label' => 'Menu Log Aktivitas',
-              'value' => 'Menu Log Aktivitas',
+              'label' => 'Menu Log Activity',
+              'value' => 'module.log-activity.index',
+            ],
+            [
+              'label' => 'Detail Log Activity',
+              'value' => 'module.log-activity.detail',
             ]
           ]
         ]

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 if (! function_exists('prepare_main_menu')) {
     function prepare_main_menu() {
-        $reservedKeywords = ['.index', '.create', '.edit', '.show'];
+        $reservedKeywords = ['.index', '.create', '.edit', '.show', '.detail'];
         $main_menu = collect(config('main-menu.menu'));
         $currentRoute = str_replace_multiple($reservedKeywords, '', Route::currentRouteName());
         $main_menu->transform(function($menu) use ($currentRoute, $reservedKeywords) {
@@ -68,5 +68,39 @@ if (! function_exists('format_money')) {
             return number_format($value, 0, ',', '.');
         }
         return $value > 0 ? number_format($value, 0, ',', '.') : null;
+    }
+}
+
+if (! function_exists('get_file_url')) {
+    function get_file_url($disk_name = 'public', $file_name) {
+        if ($file_name) {
+            return Storage::disk($disk_name)->url($file_name);
+        }
+
+        return $file_name;
+    }
+}
+
+if (! function_exists('log_activity')) {
+    function log_activity($description, $model, $extra = [], $causer = null, $log_name = null) {
+        $properties = [];
+        if (is_array($model)) {
+            foreach ($model as $key => $value) {
+                $properties[] = collect([
+                                    'attributes' => $value->getOriginal() ?? null,
+                                    'changes' => $value->getChanges() ?? null,
+                                ])->merge($extra);
+            }
+        } else {
+            $properties[] = collect([
+                                'attributes' => $model->getOriginal() ?? null,
+                                'changes' => $model->getChanges() ?? null,
+                            ])->merge($extra);
+        }
+
+        activity($log_name ?: config('activitylog.default_log_name', 'default'))
+            ->by($causer ?: (Auth::user() ?? null))
+            ->withProperties($properties)
+            ->log($description);
     }
 }

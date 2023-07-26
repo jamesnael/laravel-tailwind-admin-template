@@ -35,6 +35,10 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth:s
         Route::match(['put', 'patch'], 'password', '\Laravel\Fortify\Http\Controllers\PasswordController@update')->name('password-update');
     });
 
+    Route::get('log-activity', 'LogActivityController@index')->name('log-activity.index')->middleware('has_access:module.log-activity.index');
+    Route::get('log-activity/{log_activity:id}/detail', 'LogActivityController@detail')->name('log-activity.detail')->middleware('has_access:module.log-activity.detail');
+    Route::get('getLogAktivitasTable', 'LogActivityController@table')->name('log-activity.table')->middleware('has_access:module.log-activity.index');
+
     Route::group(['prefix' => 'data-master', 'as' => 'data-master.', 'namespace' => 'DataMaster'], function() {
         Route::group(['prefix' => 'jabatan', 'as' => 'jabatan.'], function() {
             Route::get('/', 'JabatanController@index')->name('index')->middleware('has_access:module.data-master.jabatan.index');
@@ -54,6 +58,14 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth:s
             Route::match(['put', 'patch'], '/{karyawan:slug}', 'KaryawanController@update')->name('update')->middleware('has_access:module.data-master.karyawan.edit');
             Route::delete('/{karyawan:slug}', 'KaryawanController@destroy')->name('destroy')->middleware('has_access:module.data-master.karyawan.delete');
             Route::get('/table', 'KaryawanController@table')->name('table')->middleware('has_access:module.data-master.karyawan.index');
+        });
+
+        Route::group(['prefix' => 'banner', 'as' => 'banner.'], function() {
+            Route::get('/', 'BannerController@index')->name('index')->middleware('has_access:module.data-master.banner.index');
+            Route::get('/{banner:slug}/ubah', 'BannerController@edit')->name('edit')->middleware('has_access:module.data-master.banner.edit');
+            Route::match(['put', 'patch'], '/{banner:slug}', 'BannerController@update')->name('update')->middleware('has_access:module.data-master.banner.edit');
+            Route::delete('/{banner:slug}', 'BannerController@destroy')->name('destroy')->middleware('has_access:module.data-master.banner.delete');
+            Route::get('/table', 'BannerController@table')->name('table')->middleware('has_access:module.data-master.banner.index');
         });
 
     });

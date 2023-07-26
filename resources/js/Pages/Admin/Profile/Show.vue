@@ -37,7 +37,7 @@
           </div>
         </div>
 
-        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
+        <!-- <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
           <div class="flex-1 flex flex-col space-y-2">
             <span class="text-black font-medium">Tanggal Lahir <span class="text-red-400">*</span></span>
             <input-date :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-200': true, 'border-red-400': form.errors.tanggal_lahir }" v-model="form.tanggal_lahir" :disabled="form.processing" />
@@ -65,7 +65,7 @@
             </progress>
             <span v-if="form.errors.ektp" class="text-red-400 italic">{{ form.errors.ektp }}</span>
           </div>
-        </div>
+        </div> -->
 
         <div class="flex md:space-x-8">
           <div class="flex-1 flex flex-col space-y-2">

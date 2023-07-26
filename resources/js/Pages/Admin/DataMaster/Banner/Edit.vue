@@ -1,5 +1,5 @@
 <template>
-  <Head title="User" />
+  <Head title="Banner" />
 
   <admin-layout>
     <template #breadcrumbs>
@@ -7,13 +7,13 @@
     </template>
     
     <template #page-title>
-      <h2 class="text-dark-7 text-lg font-medium mr-auto pb-5">Create User</h2>
+      <h2 class="text-dark-7 text-lg font-medium mr-auto pb-5">Edit Banner</h2>
     </template>
 
-    <karyawan-form
-      http-method="post"
-      :action-uri="route('admin.data-master.karyawan.store')"
-      :jabatan="jabatan"
+    <banner-form
+      http-method="put"
+      :action-uri="route('admin.data-master.banner.update', [banner.slug])"
+      :banner="banner"
      />
 
   </admin-layout>
@@ -23,23 +23,23 @@
   import { Head, useForm } from '@inertiajs/inertia-vue3';
   import AdminLayout from '@/Layouts/AdminLayout.vue';
   import Breadcrumb from '@/Layouts/Breadcrumb.vue';
-  import KaryawanForm from '@/Pages/Admin/DataMaster/Karyawan/Form.vue';
+  import BannerForm from '@/Pages/Admin/DataMaster/Banner/Form.vue';
 
   export default {
-    name: 'MasterKaryawanCreate',
+    name: 'MasterBannerCreate',
     components: {
       Head,
       AdminLayout,
       Breadcrumb,
-      KaryawanForm,
+      BannerForm,
     },
     props: {
       breadcrumbs: {
         type: Array
       },
-      jabatan: {
-        type: Array,
-        default: () => []
+      banner: {
+        type: Object,
+        default: () => null
       }
     }
   }

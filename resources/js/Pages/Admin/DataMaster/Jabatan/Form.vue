@@ -3,12 +3,12 @@
     <div class="flex flex-col space-y-4">
       <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
         <div class="flex-1 flex flex-col space-y-2">
-          <span class="text-black font-medium">Nama Jabatan <span class="text-red-400">*</span></span>
+          <span class="text-black font-medium">Group User <span class="text-red-400">*</span></span>
           <input type="text" :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.nama_jabatan }" v-model="form.nama_jabatan" :disabled="form.processing">
           <span v-if="form.errors.nama_jabatan" class="text-red-400 italic">{{ form.errors.nama_jabatan }}</span>
         </div>
         <div class="flex-1 flex flex-col space-y-2">
-          <span class="text-black font-medium">Tipe User <span class="text-red-400">*</span></span>
+          <span class="text-black font-medium">User Type <span class="text-red-400">*</span></span>
           <select-search
             clearable
             :class="{ 'rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.tipe_user }"
@@ -22,7 +22,7 @@
 
       <div class="flex md:space-x-8">
         <div class="flex-1 flex flex-col space-y-2">
-          <span class="text-black font-medium">Keterangan <span class="text-red-400">*</span></span>
+          <span class="text-black font-medium">Description <span class="text-red-400">*</span></span>
           <textarea rows="1" :class="{ 'w-full rounded-md focus:ring-1 ring-indigo-500 placeholder-gray-500 text-black disabled:cursor-not-allowed disabled:bg-gray-100': true, 'border-red-400': form.errors.keterangan }" v-model="form.keterangan" :disabled="form.processing" />
           <span v-if="form.errors.keterangan" class="text-red-400 italic">{{ form.errors.keterangan }}</span>
         </div>
@@ -31,8 +31,8 @@
       <div v-if="form.tipe_user === 'Backend User'">
         <div class="flex md:space-x-8">
           <div class="flex-1 flex flex-col space-y-2">
-            <span class="text-black font-medium">Hak Akses</span>
-            <button type="button" class="max-w-max py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-300 disabled:cursor-not-allowed" @click.prevent="checkedAll()" :disabled="form.processing">Pilih Semua</button>
+            <span class="text-black font-medium">Role Access</span>
+            <button type="button" class="max-w-max py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-300 disabled:cursor-not-allowed" @click.prevent="checkedAll()" :disabled="form.processing">Select All</button>
           </div>
         </div>
 
@@ -55,10 +55,10 @@
 
       <div class="flex flex-row justify-end space-x-4">
         <Link class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300 disabled:cursor-not-allowed" :href="route('admin.data-master.jabatan.index')" :disabled="form.processing">
-          Kembali
+          Back
         </Link>
         <button type="submit" class="py-3 px-6 text-center shadow-md rounded-md font-semibold text-white bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-not-allowed" :disabled="form.processing">
-          Simpan
+          Save
         </button>
       </div>
     </div>
@@ -102,14 +102,6 @@
         {
           label: 'Backend User',
           value: 'Backend User'
-        },
-        {
-          label: 'Supervisor',
-          value: 'Supervisor'
-        },
-        {
-          label: 'Sales',
-          value: 'Sales'
         }
       ]);
 
